@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Countdown Time | 2024</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="time">
+        <div class="circle" style="--clr:#fff;">
+           <!-- <div class="dots  day_dot"></div>-->
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70">dd</circle>    
+            </svg>
+            <div id="days">00</div>
+        </div>
+
+        <div class="circle" style="--clr:#ff2972;">
+            <!--<div class="dots hours_dot"></div>-->
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70">"hh"</circle> 
+            </svg>
+            <div id="hours">00</div>
+        </div>
+
+        <div class="circle" style="--clr:#fee800;">
+            <!--<div class="dots min_dot"></div>-->
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70">"mm"</circle> 
+            </svg>
+            <div id="minutes">00</div>
+        </div> 
+
+        <div class="circle" style="--clr:#04fc43;">
+            <!--<div class="dots sec_dot"></div>-->
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70">"ss"</circle> 
+            </svg>
+            <div id="seconds">00</div>
+        </div>
+    </div>
+
+        
+    <script>
+      let days = document.getElementById('days');
+      let hours = document.getElementById('hours');
+      let minutes = document.getElementById('minutes');
+      let seconds = document.getElementById('seconds');
+
+      let day_dot = document.querySelector('.day_dot');
+      let hr_dot = document.querySelector('.hr_dot');
+      let min_dot = document.querySelector('.min_dot');
+      let sec_dot = document.querySelector('.sec_dot');
+
+      let startDate = '09/01/2023  00:00:00';
+      let x = setInterval(function () {
+          let now = new Date().getTime();
+          let Countdown = new Date(startDate).getTime();
+          let distance = Countdown - now;
+        
+          let d = Math.floor(Math.abs(distance) / (1000 * 60 * 60 * 24));
+          let h = Math.floor((Math.abs(distance) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          let m = Math.floor((Math.abs(distance) % (1000 * 60 * 60)) / (1000 * 60));
+          let s = Math.floor((Math.abs(distance) % (1000 * 60)) / 1000);
+
+          days.innerHTML = d + "<br><span>Days</span>";
+          hours.innerHTML = h + "<br><span>Hours</span>";
+          minutes.innerHTML = m + "<br><span>Minutes</span>";
+          seconds.innerHTML = s + "<br><span>Seconds</span>";
+
+          day_dot.style.transform = `rotateZ(${d * 0.986}deg)`;
+          hr_dot.style.transform = `rotateZ(${h * 15}deg)`;
+          min_dot.style.transform = `rotateZ(${m * 6}deg)`;
+          sec_dot.style.transform = `rotateZ(${s * 6}deg)`;
+
+          if (distance <= 0) {
+              clearInterval(x);
+              document.getElementById("time").style.display = 'none';
+              document.querySelector(".newYear span").style.display = 'block';  
+          }
+      }, 1000);
+  </script>
+</body>
+</html>
